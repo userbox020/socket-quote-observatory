@@ -1,0 +1,15 @@
+{
+  "name": "socket-quote-observatory",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline normalization and safety tooling for an authorized Socket V3 quote benchmark.",
+  "scripts": {
+    "check": "node --check src/normalize.js && node --check test/normalize.test.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
