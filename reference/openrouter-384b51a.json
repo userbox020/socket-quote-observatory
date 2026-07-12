@@ -1,0 +1,24 @@
+{
+  "sourceRepository": "https://github.com/SocketDotTech/openrouter",
+  "sourceCommit": "384b51a1a1e24bb469123c06f8f8bdc6e645f98a",
+  "sourceCommitDate": "2026-07-02T11:20:51Z",
+  "license": "GPL-3.0-only",
+  "chains": [8453, 42161],
+  "contracts": {
+    "allowanceHolder": {
+      "address": "0x50c4E75a512F2A14A7b304787Adf79C4531A5909",
+      "runtimeBytecodeHash": "0x0be5794255d21df0f4a10a516428f8d06805779d69b1714297bebcc18971e0b4"
+    },
+    "openRouter": {
+      "address": "0x50cFe7c1938dB66A1a6D2e86D36F39FBef3d5c4a",
+      "runtimeBytecodeHash": "0xd1dbc2c8ca87939cadf58e4eb91832cbe44bd5d12e3a0a0d56c76928a818e26b"
+    }
+  },
+  "selectors": {
+    "allowanceHolderExec": "0x2213bc0b",
+    "swap": "0x1bb1a530",
+    "swapAndBridge": "0x324012e2",
+    "bridge": "0xb18248d5",
+    "performActions": "0x197aa51e"
+  }
+}

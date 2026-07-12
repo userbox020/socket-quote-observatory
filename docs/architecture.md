@@ -35,6 +35,19 @@ Therefore:
 
 Implemented in `src/normalize.js`. It validates integer amounts and important route metadata, selects the maximum-output route, and returns a reduced observation.
 
+### OpenRouter reference inspector
+
+Implemented in `src/openrouter-reference.js` and pinned by `reference/openrouter-384b51a.json`. It:
+
+- classifies the outer AllowanceHolder selector;
+- decodes the canonical `exec(address,address,uint256,address,bytes)` envelope;
+- checks Base/Arbitrum addresses against pinned deployment metadata;
+- classifies the inner OpenRouter entrypoint without claiming full ABI validation;
+- compares caller-supplied runtime bytecode or hashes with pinned values;
+- emits no full calldata and never grants execution approval.
+
+This component exists to detect obvious drift and unsafe route shapes. It cannot establish that an API-generated route is safe or profitable.
+
 ### Authorized collector
 
 Not implemented while API authorization is pending. Its eventual requirements are:

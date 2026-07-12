@@ -37,11 +37,11 @@ Socket observations will be compared with direct, block-referenced quotes. Socke
 
 Cross-chain Base/Arbitrum inventory-routing research is a later optional phase. It will not begin until the same-chain calibration passes and there is a demonstrated operational need.
 
-See [the experiment specification](docs/experiment.md) and [architecture](docs/architecture.md).
+See [the experiment specification](docs/experiment.md), [architecture](docs/architecture.md), and [Socket GitHub findings](docs/socket-github-findings.md).
 
 ## Offline Usage
 
-Requires Node.js 20 or newer. No dependencies or API credentials are needed.
+Requires Node.js 20 or newer. The offline verifier uses the audited, dependency-free `@noble/hashes` package for Ethereum Keccak-256. No API credentials are needed.
 
 ```bash
 npm test
@@ -59,6 +59,34 @@ const observation = normalizeSocketQuote(socketResponse, {
 
 The returned observation contains quote economics and provider metadata, but not `approval` or `txData`.
 
+## OpenRouter Reference Inspection
+
+The package pins Socket's OpenRouter source and deployment metadata at commit [`384b51a`](https://github.com/SocketDotTech/openrouter/commit/384b51a1a1e24bb469123c06f8f8bdc6e645f98a).
+
+```js
+import {
+  inspectAllowanceHolderTransaction,
+  compareRuntimeBytecode
+} from "./src/openrouter-reference.js";
+
+const envelope = inspectAllowanceHolderTransaction({
+  chainId: 8453,
+  to: route.txData.object.to,
+  data: route.txData.object.data
+});
+
+const runtimeComparison = compareRuntimeBytecode({
+  chainId: 8453,
+  contract: "openRouter",
+  address: openRouterAddress,
+  runtimeBytecode
+});
+```
+
+The inspection result retains only hashes, lengths, selectors, addresses, and the outer amount. It does not return full calldata and always reports `executionAllowed: false`.
+
+`outerEnvelopeCanonical` proves only that the outer `AllowanceHolder.exec` encoding is canonical. `referenceTargetsMatch` proves only that the pinned Base/Arbitrum addresses match. The inner OpenRouter ABI and provider calldata are deliberately not treated as validated.
+
 ## Non-Goals
 
 - Transaction routing or wallet UX.
@@ -66,6 +94,7 @@ The returned observation contains quote economics and provider metadata, but not
 - A generic arbitrary-calldata executor.
 - Replacing direct pool and provider validation.
 - Claiming executable profit from sequential one-way quotes.
+- Treating an OpenRouter selector, address, or bytecode match as execution approval.
 
 ## License
 

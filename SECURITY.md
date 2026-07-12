@@ -12,6 +12,8 @@ Future dedicated API credentials must be supplied through server-side environmen
 
 Socket responses may contain approval instructions and executable transaction calldata. The normalization boundary intentionally discards these fields. Full calldata must not be persisted, replayed, forwarded to a wallet, or admitted into an execution system.
 
+The OpenRouter reference inspector accepts calldata only for in-memory classification. It emits hashes and structural metadata, never the original bytes, and every result has `executionAllowed: false`. A recognized selector or matching runtime hash does not validate recipients, fees, downstream targets, spenders, provider calldata, quote freshness, or economic safety.
+
 ## Reporting
 
 Please report security concerns privately to the repository owner through GitHub. Do not include credentials, wallet secrets, private RPC URLs, or complete executable calldata in a report.

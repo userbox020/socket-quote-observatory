@@ -5,8 +5,11 @@
   "type": "module",
   "description": "Offline normalization and safety tooling for an authorized Socket V3 quote benchmark.",
   "scripts": {
-    "check": "node --check src/normalize.js && node --check test/normalize.test.js",
+    "check": "node --check src/normalize.js && node --check src/openrouter-reference.js && node --check test/normalize.test.js && node --check test/openrouter-reference.test.js",
     "test": "node --test"
+  },
+  "dependencies": {
+    "@noble/hashes": "^1.8.0"
   },
   "engines": {
     "node": ">=20"
